@@ -16,7 +16,23 @@ def get_names_and_emails(user_form, indexes):
     '''
     for index in indexes:
         player_info = {
+            'id': index,
             'name': user_form['full_name_' + index],
             'email': user_form['email_' + index]
         }
         yield player_info
+
+
+def get_players(user_form, indexes):
+    '''Get player information
+    return: list of dicts
+    '''
+    players = []
+    for index in indexes:
+        player_info = {
+            'id': index,
+            'name': user_form['full_name_' + index],
+            'email': user_form['email_' + index]
+        }
+        players.append(player_info)
+    return players

@@ -8,7 +8,7 @@ from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 
 # Internal
-from .utils.process import get_element_index, get_names_and_emails
+from .utils.process import get_element_index, get_names_and_emails, get_players
 from .utils.draw import game_draw
 
 
@@ -35,12 +35,9 @@ def myspace(request):
             context['player_range'] = range(1, context['players']+1)
         elif 'create_player_form' in request.POST:
             dictionary_keys = request.POST.keys()
-            for element in get_names_and_emails(request.POST, get_element_index(
-                    dictionary_keys)):
-
-                print(element)
-
-        print(game_draw([1, 2, 3]))
+            players = get_players(
+                request.POST, get_element_index(dictionary_keys))
+            get_pairs = game_draw(players)
 
     return HttpResponse(template.render(context, request))
 
