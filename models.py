@@ -22,6 +22,8 @@ class Friend(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200)
     email = models.EmailField(max_length=200)
+    gift_to = models.ForeignKey(
+        'self', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.full_name
